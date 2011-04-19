@@ -1,4 +1,8 @@
-Framewerk is an Object Oriented PHP5 Web Development Framework
---------------------------------------------------------------
+Internal framework directories:
 
-Initial development started in 2004 and it has matured and mutated along the way.  This repository is the start of a clean up for public consumption.
+Config - framework config
+Engine - framework engine and supporting php classes
+Include - internal php classes
+Interface - php classes handling web requests
+Scripts - standalone scripts
+Themes - framework themes
