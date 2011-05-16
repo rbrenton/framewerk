@@ -2,7 +2,7 @@
 /**
  * Framewerk Non-Caching Controlling Program
  *
- * This program is responsbile for the high level operation of the fMain object. All requests are funneled through this script.
+ * This program is responsible for the high level operation of the fMain object. All requests are funneled through this script.
  *
  * @author     R. Brenton Strickler <rbrenton@gmail.com>
  * @link       http://framewerk.org

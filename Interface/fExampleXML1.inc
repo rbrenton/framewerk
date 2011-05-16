@@ -9,7 +9,7 @@ class fExampleXML1 extends fApplication
   {
     $this->baseURI = '/example1/';
     $this->uriStack = array();
-    if(preg_match(";^{$this->baseURI}(.*);", $_SERVER['REDIRECT_URL'], $regs)) {
+    if(preg_match(";^{$this->baseURI}(.*?)([?#].*)?$;", $_SERVER['REQUEST_URI'], $regs)) {
       $this->uriStack = split('/',$regs[1]);
     }
 

@@ -18,7 +18,8 @@ class fExampleDB1 extends fApplication
       error_reporting($err ^ E_NOTICE);
 
     /* Determine script URI for easy reference in callbacks later */
-    $scriptBaseURI = 'http'.($_SERVER['HTTPS']=='on'?'s':'')."://{$_SERVER['HTTP_HOST']}{$_SERVER['REDIRECT_URI']}";
+    $uri = preg_replace('/([?#].*)/', '', $_SERVER['REQUEST_URI']);
+    $scriptBaseURI = 'http'.($_SERVER['HTTPS']=='on'?'s':'')."://{$_SERVER['HTTP_HOST']}{$uri}";
 
     try {
 
