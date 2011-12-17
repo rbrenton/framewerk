@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Fatal Message
  *
@@ -29,8 +29,8 @@ class fFatalMessage
     if ( is_file( $registryFile ) )
     {
       $this->registry = @simplexml_load_file($registryFile);
-    } 
-    elseif (is_file( "{$registryFile}.dist" ) ) 
+    }
+    elseif (is_file( "{$registryFile}.dist" ) )
     {
       // The installer failed to read the README
       $this->registry = @simplexml_load_file("{$registryFile}.dist");

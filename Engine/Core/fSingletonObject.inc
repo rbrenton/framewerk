@@ -16,10 +16,10 @@ abstract class fSingletonObject
    * @var fMain
    */
   protected $fMain;
-  
+
   private $entity = array();
   protected $validEntities = array();
-  
+
   /**
    * @param Object fMain parent
    */

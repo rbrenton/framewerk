@@ -49,7 +49,7 @@ class fHTTPException extends Exception
         $this->code = $code;
         break;
     }
-    
+
     if ( !empty($message) )
       $this->message = $message;
   }
