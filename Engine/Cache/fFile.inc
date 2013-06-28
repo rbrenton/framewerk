@@ -20,14 +20,14 @@ class fFile
 
   private $fileName;
   private $disableCache;
-  
+
   /**
    * Static cache
    *
    * @var array
    */
   private static $sCache = array();
-  
+
   /**
    * Constructor
    *
@@ -42,7 +42,7 @@ class fFile
     $this->fileName = $fileName;
     $this->disableCache = $diableCache;
   }
-  
+
 
   /**
    * Return the file contents

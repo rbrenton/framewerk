@@ -28,7 +28,7 @@ class fMain extends fSingletonObject
    */
   static function getInstance()
   {
-    if ( self::$instance == null ) 
+    if ( self::$instance == null )
     {
       self::$instance = new fMain();
     }

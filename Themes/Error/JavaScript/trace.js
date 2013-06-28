@@ -3,7 +3,7 @@ $(document).ready(function(){
     $(this).parent('div').hide();
     return false;
   });
-  
+
   $('a.arg').click(function(e){
     var id = $(this).attr('id');
     var popupid = '#' + id + 'Popup';
@@ -12,5 +12,5 @@ $(document).ready(function(){
     $(popupid).show();
     return false;
   });
-  
+
 });

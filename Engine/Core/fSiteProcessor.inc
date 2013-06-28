@@ -41,7 +41,7 @@ class fSiteProcessor
 
   /**
    * Comments would be nice here, eh? What does this function actually do?
-   */  
+   */
   function processKey($node, $depth = 0)
   {
     // If we're this deep, we're deep in it
@@ -54,8 +54,8 @@ class fSiteProcessor
     $uri = '';
     for ( $i = $depth; $i < count($this->uri); $i++)
       $uri .= '/' . $this->uri[$i];
-    
-    if($uri == '') 
+
+    if($uri == '')
       $uri = '/';
 
     // Run xpath to find matching URI nodes
@@ -63,7 +63,7 @@ class fSiteProcessor
 
     // Sort the keys
     usort($xml, array('fSiteProcessor', '_arrangeKeyNodes'));
-    
+
     foreach ( $xml as $key )
     {
       if(isset($key['uri']))
@@ -73,7 +73,7 @@ class fSiteProcessor
 
         for ( $y = $depth; $y < ( $count + $depth); $y++)
           $uri .= '/' . $this->uri[$y];
-        
+
         // Process and see if our URI's match
         if($uri == $key['uri'])
         {

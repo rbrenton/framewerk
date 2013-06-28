@@ -80,13 +80,13 @@ class fHTTPMessage extends fFatalMessage
     $this->message = $this->exception->getMessage();
     $this->line = $this->exception->getLine();
     $this->file = $this->exception->getFile();
-    
+
     $fDebug = array_shift($this->registry->xpath('/registry/node[@name="fDebug"]'));
     if ( $fDebug->level > 0 )
     {
       $this->trace = $this->exception->getTrace();
     }
-    
+
     $dom = $this->createDOM();
     $this->content = $this->createPage( $dom );
   }
@@ -113,7 +113,7 @@ class fHTTPMessage extends fFatalMessage
       $code = $dom->createElement('code');
       $root->appendChild($code);
       foreach ( $this->trace AS $entry )
-      {      
+      {
         $line = $dom->createElement( 'backtrace' );
         $code->appendChild($line);
 
@@ -125,11 +125,11 @@ class fHTTPMessage extends fFatalMessage
         $type = $dom->createElement( 'type' );
         $type->appendChild( $dom->createCDataSection( $entry['type'] ) );
         $line->appendChild( $type );
-        
+
         // Add args
         $args = $dom->createElement( 'args' );
         $line->appendChild( $args );
-        
+
         for ( $y = 0; $y < count( $entry['args'] ); $y++ )
         {
           $arg = $dom->createElement( 'arg' );
@@ -139,7 +139,7 @@ class fHTTPMessage extends fFatalMessage
           $arg->appendChild( $dom->createElement( 'name', $name ) );
           $value = $dom->createElement( 'value' );
           $arg->appendChild( $value );
-          
+
           // Convert the values to a UL
           if ( is_object( $entry['args'][$y] ) ||  is_array( $entry['args'][$y] ) )
           {
@@ -147,13 +147,13 @@ class fHTTPMessage extends fFatalMessage
             $value->appendChild( $dom->importNode( $importNode, true ) );
           } else {
             $value->appendChild( $dom->createCDataSection( $entry['args'][$y] ) );
-          }  
+          }
         }
-    
+
         // Get the line of code
         $file = file_get_contents($entry['file']);
         $data = explode("\n", $file);
-        
+
         $source = $dom->createElement('source');
         $line->appendChild($source);
 
@@ -162,13 +162,13 @@ class fHTTPMessage extends fFatalMessage
         if ( $offset < 0 ) $offset = 0;
         $max = $offset + 10;
         if ( $max > count($data) ) $max = count($data);
-        
+
         // Get the code
         for ( $l = $offset; $l < $max; $l++ )
         {
           $sourceCode = $dom->createElement( 'line' );
           $sourceCode->setAttribute( 'number', $l );
-          $sourceCode->appendChild( $dom->createCDataSection( $data[$l] ) );        
+          $sourceCode->appendChild( $dom->createCDataSection( $data[$l] ) );
           $source->appendChild( $sourceCode );
         }
       }

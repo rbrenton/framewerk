@@ -27,7 +27,7 @@ class fDB extends fSingletonObject
 
   /**
    * Get or create fDB instance
-   * 
+   *
    * @return fDB
    */
   public static function getInstance( )
@@ -48,7 +48,7 @@ class fDB extends fSingletonObject
       throw new Exception("Server {$server} not found in registry.");
 
     $entry = &$this->registry->{$server};
-  
+
     if(!($this->resources[$server] = @pg_connect((string) $entry->dsn)))
       throw new Exception('Database connection error.');
       //throw new Exception(pg_last_error());//tmi

@@ -29,10 +29,10 @@ class tClassInfo
       $reflection = $class;
     else
       $reflection = new ReflectionClass($class);
-    
+
     // Get our comments
     $comments = $reflection->getDocComment();
-    
+
     // Explode the comments into an array via the linefeed
     $lines = explode("\n", $comments);
 
