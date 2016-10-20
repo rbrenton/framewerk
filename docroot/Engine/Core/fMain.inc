@@ -56,18 +56,15 @@ class fMain extends fSingletonObject
 
     // Read our configuration file
 
-    // Load our registry
-    $registry = new fRegistry('fMain');
-    $this->configurationXML = &$registry;
-
     // Set our timezone and locale
-    putenv('TZ=' . $registry->timezone);
-    setLocale(LC_ALL, strval($registry->locale));
+    putenv('TZ=' . SYSTEM_TIMEZONE);
+    setLocale(LC_ALL, SYSTEM_LOCALE);
 
     // Process our ini file settings
-    foreach($registry->php AS $setting)
-      foreach($setting AS $key=>$value)
-        ini_set(strval($key), strval($value));
+    if(defined(PHP_SESSION_DIR)) {
+      if (!is_dir(PHP_SESSION_DIR)) mkdir(PHP_SESSION_DIR, 0777);
+      ini_set('session.save_path', PHP_SESSION_DIR);
+    }
   }
 
   /**

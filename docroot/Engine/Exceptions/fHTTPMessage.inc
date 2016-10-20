@@ -38,26 +38,6 @@ class fHTTPMessage extends fFatalMessage
         break;
 
       case 403:
-        // Check if logged in
-        /**
-         * Todo I don't this this belongs here.  At best, it could be in fSession?
-        $registry = new fRegistry($this);
-
-        if ( fSession::getInstance()->isAuthenticated() == 'false' )
-        {
-          // Should we redirect the client?
-          $redir = $registry->redirectGuestOn403;
-          if ( !empty($redir) )
-          {
-            $fMain = array_shift($this->registry->xpath('/registry/node[@name="fMain"]'));
-            $redir = str_replace("{@baseURL}", $fMain->site->baseURL, $redir);
-            $referer = ( strtolower($_SERVER['HTTPS']) == 'on' ? "https://" : "http://" );
-            $referer .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-            header( 'Location: ' . $redir . '?redirect=' . urlencode( $referer ) );
-            exit();
-          }
-        } */
-
         $this->error = '403: Forbidden';
         $this->description = 'You do not have permission to access the requested content on this server.';
         header($protocol . ' 403 Forbidden');
@@ -81,8 +61,7 @@ class fHTTPMessage extends fFatalMessage
     $this->line = $this->exception->getLine();
     $this->file = $this->exception->getFile();
     
-    $fDebug = array_shift($this->registry->xpath('/registry/node[@name="fDebug"]'));
-    if ( $fDebug->level > 0 )
+    if ( defined(SYSTEM_FDEBUG) && SYSTEM_FDEBUG > 0 )
     {
       $this->trace = $this->exception->getTrace();
     }

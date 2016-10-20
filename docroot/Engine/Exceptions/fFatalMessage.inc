@@ -15,7 +15,7 @@
 
 class fFatalMessage
 {
-  protected $content, $registry, $simple, $xslpath;
+  protected $content, $simple, $xslpath;
   public $description, $error, $file, $line, $message;
 
  /**
@@ -23,18 +23,7 @@ class fFatalMessage
   */
   public function __construct()
   {
-    $registryFile = 'Config/registry.xml';
-
-    // Load the registry or distribution registry
-    if ( is_file( $registryFile ) )
-    {
-      $this->registry = @simplexml_load_file($registryFile);
-    } 
-    elseif (is_file( "{$registryFile}.dist" ) ) 
-    {
-      // The installer failed to read the README
-      $this->registry = @simplexml_load_file("{$registryFile}.dist");
-    }
+    // nothing to do
   }
 
   /**
@@ -59,25 +48,22 @@ class fFatalMessage
     $xslproc->importStyleSheet($xsl);
     $content = $xslproc->transformToXml($dom);
 
-    // get fMain node for baseURI
-    $fMain = array_shift($this->registry->xpath('/registry/node[@name="fMain"]'));
-    $fDebug = array_shift($this->registry->xpath('/registry/node[@name="fDebug"]'));
-    if ( intval($fDebug->level) < 1 )
+    if ( !defined(PHP_FDEBUG) || PHP_FDEBUG < 1 )
     {
       $tpl = file_get_contents('Themes/Error/simple.html');
       $tpl = str_replace("{@pageTitle}", $this->error, $tpl);
-      $tpl = str_replace("{@baseURI}", $fMain->siteXML->baseURI, $tpl);
+      $tpl = str_replace("{@baseURI}", WEB_PATH, $tpl);
       $this->simple = true;
       $style = 'simple.css';
     } else {
       $tpl = file_get_contents('Themes/Error/template.html');
       $tpl = str_replace("{@pageTitle}", "Server Error", $tpl);
-      $tpl = str_replace("{@baseURI}", $fMain->siteXML->baseURI, $tpl);
+      $tpl = str_replace("{@baseURI}", WEB_PATH, $tpl);
       $this->simple = false;
       $style = 'style.css';
     }
     $tpl = str_replace("{@pageTitle}", "Server Error", $tpl);
-    $tpl = str_replace("{themeDir}", rtrim($fMain->siteXML->baseURI, '/') . '/Themes/Error/', $tpl);
+    $tpl = str_replace("{themeDir}", rtrim(WEB_PATH, '/') . '/Themes/Error/', $tpl);
     $tpl = str_replace("{content}", $content, $tpl);
     $tpl = str_replace("{css}", $style, $tpl);
 

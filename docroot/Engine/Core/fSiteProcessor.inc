@@ -85,14 +85,18 @@ class fSiteProcessor
               $process = false;
 
           // Force SSL if required
-          if($process && intval($key['force-ssl']) == 1 && $_SERVER['HTTPS'] != 'on') {
-            header("Location: https://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']})");
-            exit();
+          if(intval($key['force-ssl']) == 1) {
+            if($_SERVER['SERVER_PORT'] != 443) {
+              header("Location: https://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']})");
+              exit();
+            } else if($_SERVER['HTTPS']!='on') {
+              throw new fHTTPException(500, "SSL required but not properly configured.");
+            }
           }
 
           // Process any sub-keys if we have them
           $response = false;
-          if($process && isset($key->key)) {
+          if(isset($key->key) && ( $process == true )) {
             $response = $this->processKey($key, ($depth + $count));
             if(( $process == false ) && ( $response == true ) ) $process = true;
           }
@@ -180,6 +184,18 @@ class fSiteProcessor
       // If we can process, do so
       if($process == true)
       {
+        // Set the title if there is one
+        if(isset($action->title))
+          $this->fOutput->setPageName($action->title);
+
+        // Set the pageCategory if there is a group
+        if(isset($action->group))
+          $this->fOutput->setPageCategory($action->group);
+
+        // Override our theme if we need to
+        if(isset($action->theme))
+          fTheme::getInstance()->override(strval($action->theme));
+
         // If class is set instantiate it
         if(isset($action->class))
           $this->class = strval($action->class);
@@ -213,7 +229,6 @@ class fSiteProcessor
   function process($uri)
   {
     $uri = preg_replace('/([?#].*)/', '', $_SERVER['REQUEST_URI']);
-
 
     $temp = explode('/', trim($uri, '/'));
     $this->uri = array();

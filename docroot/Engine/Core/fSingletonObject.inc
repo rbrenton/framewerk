@@ -10,7 +10,17 @@
  * @copyright  Copyright 2004-2011 the Framewerk Development Group
  */
 
-abstract class fSingletonObject
+// For PHP 5.5 compatibility.
+interface _fSingletonObject {
+  /**
+   * @abstract
+   * @static
+   * @return mixed
+   */
+  static function getInstance();
+}
+
+abstract class fSingletonObject implements _fSingletonObject
 {
   /**
    * @var fMain
@@ -27,13 +37,6 @@ abstract class fSingletonObject
   {
     $this->fMain    = fMain::getInstance();
   }
-
-  /**
-   * @abstract
-   * @static
-   * @return mixed
-   */
-  abstract public static function getInstance();
 
   /**
    * @todo We added this when we were having destruction sequence errors that I think have otherwise been resolved

@@ -59,15 +59,16 @@ class fFile
       if($this->disableCache) {
         self::$sCache[$this->fileName] = file_get_contents($this->fileName);
       } else {
-        $keyFile = "framewerk::fFile::fileContents::{$_SERVER['SERVER_NAME']}::{$this->fileName}";
-        $keyCached = "framewerk::fFile::cacheTime::{$_SERVER['SERVER_NAME']}::{$this->fileName}";
+        $keyFile = "framewerk::{$_SERVER['SERVER_NAME']}::fFile::fileContents::{$this->fileName}";
+        $keyCached = "framewerk::{$_SERVER['SERVER_NAME']}::fFile::cacheTime::{$this->fileName}";
 
         $modifiedTime = filemtime($this->fileName);
         $cacheTime = apc_fetch($keyCached);
         if($cacheTime!==false && $modifiedTime<$cacheTime) {
           //cache is current
           self::$sCache[$this->fileName] = apc_fetch($keyFile);
-        } else {
+        }
+        if($cacheTime===false || $modifiedTime>=$cacheTime || self::$sCache[$this->fileName]=='') {
           //cache is not current
           self::$sCache[$this->fileName] = file_get_contents($this->fileName);
           apc_store($keyFile, self::$sCache[$this->fileName], fFile::CACHE_DURATION);
