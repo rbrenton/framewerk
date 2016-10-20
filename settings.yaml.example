@@ -1,0 +1,69 @@
+---
+aws:
+    access_key: EXAMPLE_VALUE
+    group     :
+        ami_EXAMPLE1: system-base
+        ami_EXAMPLE2: system-api
+        ami_EXAMPLE3: system-api
+        ami_EXAMPLE4: general
+        default     : general
+    meta_uri  : http://169.254.169.254/2014-02-25
+    secret_key: EXAMPLE_VALUE
+    default_region: us-east-1
+    path: /opt/aws
+
+deploy:
+    branch  : production
+    keyfile : /home/framewerk/.ssh/aws-vpc-deploy-framewerk
+    root    : /var/www/www.example.org
+    user    : framewerk
+
+ec2:
+    home: /opt/aws/apitools/ec2
+
+elasticache:
+    host    : elasticache4.EXAMPLE.cfg.use1.cache.amazonaws.com
+    port    : 11211
+    timeout : 1000 #milliseconds
+
+glacier:
+    vault   : EXAMPLE_VALUE
+    region  : us-east-1
+
+java:
+    home    : /usr/lib/jvm/jre
+
+mysql:
+    db      : EXAMPLE_VALUE
+    master  : mysql2.EXAMPLE.us-east-1.rds.amazonaws.com
+    pass    : EXAMPLE_VALUE
+    port    : 3306
+    slave   : mysql3.EXAMPLE.us-east-1.rds.amazonaws.com
+    user    : EXAMPLE_VALUE
+
+rabbitmq:
+    host    : EXAMPLE_VALUE
+    pass    : EXAMPLE_VALUE
+    port    : 5672
+    user    : EXAMPLE_VALUE
+    vhost   : /
+
+php:
+    engine_dir : Engine
+    fdebug     : 0 # 0=off, 1=show-traces
+    include_dir: Include
+    session_dir: /tmp/www.example.org #session.save_path
+
+rollbar:
+    access_token      : EXAMPLE_VALUE
+    handler           : agent
+    agent_log_location: scripts/rollbar/logs
+
+system:
+    locale  : en_US
+    logging : 3 # 0=none, 1=error, 2=warn, 3=status, 4=info, 5=debug, 6=all
+    timezone: America/Chicago
+
+web:
+    dir     : docroot
+    path    : /
