@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site version="2.0">
-  <key uri="/">
+  <key host="www.example.org" uri="/">
     <class>fDefault</class>
   </key>
+
+  <!-- API -->
+  <key host="api.example.org" uri="/r">
+    <class>fFramewerkAPI</class>
+  </key>
+
+  <!-- Admin -->
+  <key host="admin.example.org" uri="/">
+    <class>fAdminDashboard</class>
+  </key>
+  <key host="admin.example.org" uri="/report">
+    <class>fAdminReporting</class>
+  </key>
+  <key host="admin.example.org" uri="/tests">
+    <class>fAdminTests</class>
+  </key>
+  <key host="admin.example.org" uri="/visitors">
+    <class>fAdminVisitors</class>
+  </key>
+  <key host="admin.example.org" uri="/settings">
+    <class>fAdminSettings</class>
+  </key>
+
 </site>

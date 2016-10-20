@@ -1,8 +1,15 @@
 Internal framework directories:
 
-Config - framework config
-Engine - framework engine and supporting php classes
-Include - internal php classes
-Interface - php classes handling web requests
-Scripts - standalone scripts
-Themes - framework themes
+schema - schema backup
+scripts - standalone scripts
+docroot - nginx document root
+docroot/Config - framework config
+docroot/Engine - framework engine and supporting php classes
+docroot/Include - internal php classes
+docroot/Interface - php classes handling web requests
+docroot/Themes - framework themes
+nginx - nginx configs
+Engine - legacy symlink to docroot/Engine
+Include - legacy symlink to docroot/Include
+
+(see docroot/Config/site.xml)
