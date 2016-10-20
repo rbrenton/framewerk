@@ -1,0 +1,2 @@
+# m h  dom mon dow  user command
+* * * * * root if [[ -f /var/www/www.example.org/cron.php ]]; then cd /var/www/www.example.org && php cron.php > /dev/null; fi
