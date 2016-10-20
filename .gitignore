@@ -1,0 +1,10 @@
+*.cookies
+*.csv
+*.js.min
+*.js.min.gz
+*.js.gz
+*.log
+*.orig
+*.pid
+*.swp
+nohup.out
