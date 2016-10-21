@@ -3,7 +3,7 @@
 error_reporting(E_ERROR | E_WARNING | E_PARSE | E_CORE_ERROR | E_COMPILE_ERROR | E_USER_ERROR);
 
 // Pull defines from yaml settings file.
-$yaml = yaml_parse_file(__DIR__.'/settings.yaml');
+$yaml = yaml_parse_file(__DIR__.'/settings.yml');
 function make_defines($array, $prefix=null) {
   static $dirs = array();
 

@@ -7,7 +7,7 @@ DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 #export PATH=$PATH:$EC2_HOME # Why isn't $EC2_HOME parsed from settings.yml properly?
 
 # Settings filename relative to current directory in YAML format.
-SETTINGS_YAML=$DIR/settings.yaml
+SETTINGS_YAML=$DIR/settings.yml
 
 # Parses YAML file into bash friendly variable assignments.
 function parse_yaml {
@@ -116,7 +116,7 @@ function ec2_set_name_tag {
 # __main__
 
 
-# Make settings from settings.yaml available as uppercase variable names, joined by underscores (_). 
+# Make settings from settings.yml available as uppercase variable names, joined by underscores (_). 
 # Example: Deploy:\n  Root: /var/www/www.example.org becomes: DEPLOY_ROOT="/var/www/www.example.org"
 eval $(parse_yaml $SETTINGS_YAML)
 
